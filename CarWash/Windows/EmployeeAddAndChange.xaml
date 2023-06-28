@@ -1,0 +1,124 @@
+﻿<Window x:Class="CarWash.Windows.EmployeeAddAndChange"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarWash.Windows"
+        mc:Ignorable="d"
+        Title="EmployeeAddAndChange"
+        Height="450"
+        Width="800"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        ui:ThemeManager.RequestedTheme="Dark"
+        WindowStartupLocation="CenterScreen"
+        Background="#FF262626"
+        Icon="/Images/Logo.png"
+        Name="ThisWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Image Source="/Images/Logo.png" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Border BorderBrush="White"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Margin="10">
+                    <ui:SimpleStackPanel Orientation="Vertical"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Spacing="10">
+
+                        <TextBox x:Name="SurnameTextBox"
+                                 ui:ControlHelper.Header="Фамилия сотрудника"
+                                 ui:ControlHelper.PlaceholderText="Введите фамилию"
+                                 Width="{Binding ElementName=GenderComboBox, Path=ActualWidth}"/>
+
+                        <TextBox x:Name="NameTextBox"
+                                 ui:ControlHelper.Header="Имя"
+                                 ui:ControlHelper.PlaceholderText="Введите имя" />
+
+                        <TextBox x:Name="PatronymicTextBox"
+                                 ui:ControlHelper.Header="Отчество"
+                                 ui:ControlHelper.PlaceholderText="Введите отчество"/>
+
+                        <TextBox x:Name="PhoneNumberBox"
+                                 ui:ControlHelper.Header="Номер телефона"
+                                 ui:ControlHelper.PlaceholderText="Введите номер" />
+
+                        <TextBox x:Name="EmailTextBox"
+                                 ui:ControlHelper.Header="Почта"
+                                 ui:ControlHelper.PlaceholderText="Введите почту" />
+                    </ui:SimpleStackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Border BorderBrush="White"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Margin="10">
+
+                    <ui:SimpleStackPanel Orientation="Vertical"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Center"
+                                         Margin="70 0 70 0"
+                                         x:Name="Panel"
+                                         Spacing="10">
+
+                        <TextBox x:Name="LoginTextBox"
+                                 ui:ControlHelper.Header="Логин"
+                                 ui:ControlHelper.PlaceholderText="Введите логин" />
+
+                        <TextBox x:Name="PasswordTextBox"
+                                 ui:ControlHelper.Header="Пароль"
+                                 ui:ControlHelper.PlaceholderText="Введите пароль" />
+                        <ComboBox x:Name="RoleComboBox"
+                                  ui:ControlHelper.Header="Должность"
+                                  HorizontalAlignment="Stretch"
+                                  ui:ControlHelper.PlaceholderText="Выберите должность">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RoleName}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <ComboBox x:Name="GenderComboBox"
+                                  ui:ControlHelper.Header="Пол"
+                                  ui:ControlHelper.PlaceholderText="Выберите пол"
+                                  HorizontalAlignment="Stretch">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding GenderName}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <Button x:Name="SaveButton"
+                                Content="Сохранить"
+                                Click="SaveButton_Click"
+                                Margin="0 10 0 0"
+                                HorizontalAlignment="Center"
+                                BorderBrush="White"
+                                BorderThickness="1"
+                                ui:ControlHelper.CornerRadius="15"
+                                Background="#33050404" />
+                    </ui:SimpleStackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

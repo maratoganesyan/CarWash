@@ -1,0 +1,239 @@
+﻿<Window x:Class="CarWash.Windows.EmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarWash.Windows"
+        mc:Ignorable="d"
+        Title="Личный кабинет"
+        Height="650"
+        Width="1100"
+        Foreground="White"
+        FontSize="20"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        ui:ThemeManager.RequestedTheme="Dark"
+        WindowStartupLocation="CenterScreen"
+        Background="#FF262626"
+        Icon="/Images/Logo.png">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+
+
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="6*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <ui:SimpleStackPanel VerticalAlignment="Center"
+                                 HorizontalAlignment="Left">
+                <ui:AutoSuggestBox x:Name="SearchTextBox"
+                                   Margin="10 0 0 0"
+                                   ui:ControlHelper.Header="Поиск"
+                                   Width="230"
+                                   FontSize="18"
+                                   ui:ControlHelper.PlaceholderText="Поиск"
+                                   QuerySubmitted="SearchTextBox_QuerySubmitted"
+                                   QueryIcon="Find" />
+            </ui:SimpleStackPanel>
+
+            <ui:SimpleStackPanel HorizontalAlignment="Right"
+                                 VerticalAlignment="Center"
+                                 Margin="0 0 10 0">
+                <TextBlock x:Name="EmployeeData"
+                           Text="Щербаков Даниил (Администратор)" />
+            </ui:SimpleStackPanel>
+
+            <Grid Grid.Column="1">
+                <Image Source="/Images/Logo.png" />
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  x:Name="DataGridPanel"
+                  Grid.ColumnSpan="2">
+                <DataGrid x:Name="MainDataGrid"
+                          Height="{Binding ElementName=DataGridPanel, Path=ActualHeight}"
+                          BorderBrush="White"
+                          Margin="10 0 0 0"
+                          HorizontalGridLinesBrush="White"
+                          VerticalGridLinesBrush="White"
+                          FontSize="20"
+                          ui:DataGridHelper.UseModernColumnStyles="True"
+                          BorderThickness="1"
+                          EnableColumnVirtualization="True"
+                          RowDetailsVisibilityMode="Collapsed"
+                          CanUserResizeColumns="False"
+                          HeadersVisibility="Column"
+                          IsReadOnly="True"
+                          MouseDoubleClick="MainDataGrid_MouseDoubleClick">
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+                               TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                            <Setter Property="FontWeight"
+                                    Value="SemiBold" />
+                            <Setter Property="HorizontalAlignment"
+                                    Value="Left" />
+                            <Setter Property="Margin"
+                                    Value="8 0 0 0" />
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+
+            </Grid>
+
+            <ui:SimpleStackPanel Spacing="10"
+                                 Grid.Row="2"
+                                 Grid.ColumnSpan="2"
+                                 VerticalAlignment="Center"
+                                 Orientation="Horizontal"
+                                 HorizontalAlignment="Center">
+                <Button x:Name="AddButton"
+                        Content="Добавить"
+                        Click="AddButton_Click"
+                        BorderBrush="White"
+                        BorderThickness="1"
+                        FontSize="17"
+                        ui:ControlHelper.CornerRadius="15"
+                        Background="#33050404" />
+
+                <Button x:Name="ResetButton"
+                        Content="Обновить"
+                        Click="ResetButton_Click"
+                        BorderBrush="White"
+                        BorderThickness="1"
+                        FontSize="17"
+                        ui:ControlHelper.CornerRadius="15"
+                        Background="#33050404" />
+
+                <Button x:Name="WorkReportButton"
+                        BorderBrush="White"
+                        Click="WorkReportButton_Click"
+                        BorderThickness="1"
+                        FontSize="17"
+                        ui:ControlHelper.CornerRadius="15"
+                        Background="#33050404">
+                    <Button.Content>
+                        <TextBlock TextWrapping="Wrap"
+                                   TextAlignment="Center">
+                            <Run Text="Формирование Отчета" />
+                            <LineBreak />
+                            <Run Text="по выполненным работам" />
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+
+                <Button x:Name="WorkerReportButton"
+                        BorderBrush="White"
+                        Click="WorkerReportButton_Click"
+                        BorderThickness="1"
+                        FontSize="17"
+                        ui:ControlHelper.CornerRadius="15"
+                        Background="#33050404">
+                    <Button.Content>
+                        <TextBlock TextWrapping="Wrap"
+                                   TextAlignment="Center">
+                            <Run Text="Формирование Отчета" />
+                            <LineBreak />
+                            <Run Text="по работникам" />
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+
+                <Button x:Name="CheckGenerationButton"
+                        BorderBrush="White"
+                        Click="CheckGenerationButton_Click"
+                        BorderThickness="1"
+                        FontSize="17"
+                        ui:ControlHelper.CornerRadius="15"
+                        Background="#33050404">
+                    <Button.Content>
+                        <TextBlock TextWrapping="Wrap"
+                                   TextAlignment="Center">
+                            <Run Text="Формирование" />
+                            <LineBreak />
+                            <Run Text="чека" />
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+            </ui:SimpleStackPanel>
+        </Grid>
+
+        <ui:NavigationView x:Name="Navigation"
+                           PaneDisplayMode="Left"
+                           IsSettingsVisible="False"
+                           IsPaneToggleButtonVisible="False"
+                           HorizontalAlignment="Center"
+                           IsBackButtonVisible="Collapsed">
+            <ui:NavigationView.MenuItems>
+
+                <ui:NavigationViewItem Content="Справочники"
+                                       x:Name="spr">
+                    <ui:NavigationViewItem.MenuItems>
+                        <ui:NavigationViewItem x:Name="Role"
+                                               Content="Роли"
+                                               MouseDown="Spr_MouseDown" />
+
+                        <ui:NavigationViewItem x:Name="Gender"
+                                               Content="Пол"
+                                               MouseDown="Spr_MouseDown" />
+
+                        <ui:NavigationViewItem x:Name="AdditionalServices"
+                                               Content="Услуги"
+                                               MouseDown="Spr_MouseDown" />
+
+                        <ui:NavigationViewItem x:Name="Body"
+                                               Content="Кузова"
+                                               MouseDown="Spr_MouseDown" />
+
+                        <ui:NavigationViewItem x:Name="Color"
+                                               Content="Цвета"
+                                               MouseDown="Spr_MouseDown" />
+
+                        <ui:NavigationViewItem x:Name="Mark"
+                                               Content="Марка"
+                                               MouseDown="Spr_MouseDown" />
+
+                        <ui:NavigationViewItem x:Name="Models"
+                                               Content="Модели"
+                                               MouseDown="Spr_MouseDown" />
+
+                        <ui:NavigationViewItem x:Name="OrderStatus"
+                                               Content="Статусы заказа"
+                                               MouseDown="Spr_MouseDown" />
+                    </ui:NavigationViewItem.MenuItems>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem x:Name="Clients"
+                                       MouseDown="Clients_MouseDown"
+                                       Content="Клиенты" />
+                <ui:NavigationViewItem x:Name="Employee"
+                                       MouseDown="Employee_MouseDown"
+                                       Content="Работники" />
+                <ui:NavigationViewItem x:Name="Order"
+                                       MouseDown="Order_MouseDown"
+                                       Content="Заказы" />
+                <ui:NavigationViewItem x:Name="Car"
+                                       MouseDown="Car_MouseDown"
+                                       Content="Машины" />
+            </ui:NavigationView.MenuItems>
+            <ui:NavigationView.FooterMenuItems>
+                <ui:NavigationViewItem x:Name="ExitButton"
+                                       Content="Выйти"
+                                       FontSize="17"
+                                       MouseDown="ExitButton_MouseDown" />
+            </ui:NavigationView.FooterMenuItems>
+        </ui:NavigationView>
+    </Grid>
+</Window>

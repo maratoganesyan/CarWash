@@ -1,0 +1,132 @@
+﻿<Window x:Class="CarWash.Windows.CarsAddAndChange"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarWash.Windows"
+        mc:Ignorable="d"
+        Title="CarsAddAndChange"
+        Height="550"
+        Width="800"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        ui:ThemeManager.RequestedTheme="Dark"
+        WindowStartupLocation="CenterScreen"
+        Background="#FF262626"
+        Icon="/Images/Logo.png"
+        Name="ThisWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Image Source="/Images/Logo.png" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Border BorderBrush="White"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Margin="10">
+                    <ui:SimpleStackPanel Orientation="Vertical"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Spacing="10">
+                        
+                        <ui:NumberBox x:Name="HeightBox" 
+                                      Header="Высота(мм)"
+                                      PlaceholderText="Введите высоту"/>
+
+                        <ui:NumberBox x:Name="WidthBox"
+                                      Header="Ширина(мм)"
+                                      PlaceholderText="Введите ширину" />
+
+                        <ui:NumberBox x:Name="LengthBox"
+                                      Header="Длина(мм)"
+                                      PlaceholderText="Введите длину" />
+
+                        <TextBox x:Name="StateNumberBox"
+                                      ui:ControlHelper.Header="Номер автомобиля"
+                                      ui:ControlHelper.PlaceholderText="Введите номер" />
+
+                        <RichTextBox x:Name="DescriptionTextBox"
+                                     ui:ControlHelper.Header="Описание"
+                                     Height="100"
+                                     Width="{Binding ElementName=BodyComboBox, Path=ActualWidth}"
+                                     MaxWidth="{Binding ElementName=Panel, Path=Width}"/>
+                    </ui:SimpleStackPanel>
+                </Border> 
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Border BorderBrush="White"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Margin="10">
+
+                    <ui:SimpleStackPanel Orientation="Vertical"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Center"
+                                         Margin="70 0 70 0"
+                                         x:Name="Panel"
+                                         Spacing="10">
+                        <ComboBox x:Name="MarkComboBox"
+                                  ui:ControlHelper.Header="Марка"
+                                  HorizontalAlignment="Stretch"
+                                  SelectionChanged="MarkComboBox_SelectionChanged"
+                                  ui:ControlHelper.PlaceholderText="Выберите марку" />
+
+                        <ComboBox x:Name="ModelComboBox"
+                                  HorizontalAlignment="Stretch"
+                                  ui:ControlHelper.Header="Модель"
+                                  ui:ControlHelper.PlaceholderText="Выберите модель" />
+
+                        <ComboBox x:Name="BodyComboBox"
+                                  HorizontalAlignment="Stretch"
+                                  ui:ControlHelper.Header="Кузов"
+                                  ui:ControlHelper.PlaceholderText="Выберите кузов" />
+
+                        <ComboBox x:Name="ColorComboBox"
+                                  HorizontalAlignment="Stretch"
+                                  ui:ControlHelper.Header="Цвет"
+                                  ui:ControlHelper.PlaceholderText="Выберите Цвет" />
+
+                        <ComboBox x:Name="CLientComboBox"
+                                  ui:ControlHelper.Header="Владелец автомобиля"
+                                  ui:ControlHelper.PlaceholderText="Выберите владельца"
+                                  MinWidth="{Binding ElementName=BodyComboBox, Path=ActualWidth}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Surname}" />
+                                        <Run Text="{Binding Name}" />
+                                        <Run Text="{Binding Patronymic}" />
+                                        <Run Text="{Binding PhoneNumber}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <Button x:Name="SaveButton"
+                                Content="Сохранить"
+                                Click="SaveButton_Click"
+                                Margin="0 10 0 0"
+                                HorizontalAlignment="Center"
+                                BorderBrush="White"
+                                BorderThickness="1"
+                                ui:ControlHelper.CornerRadius="15"
+                                Background="#33050404" />
+                    </ui:SimpleStackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

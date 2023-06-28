@@ -1,0 +1,16 @@
+﻿        public Db()
+        {
+
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseLazyLoadingProxies();
+                optionsBuilder{{options-builder-provider}};
+
+                //"Initial Catalog=...;Integrated Security=True;" +
+                //"Trust Server Certificate=True;Command Timeout=300;" +
+                //"MultipleActiveResultSets=true;");
+            }
+        }

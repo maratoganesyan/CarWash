@@ -1,0 +1,164 @@
+﻿<Window x:Class="CarWash.Windows.ClientsAddAndChange"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarWash.Windows"
+        mc:Ignorable="d"
+        Title="ClientsAddAndChange"
+        Height="550"
+        Width="600"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        ui:ThemeManager.RequestedTheme="Dark"
+        WindowStartupLocation="CenterScreen"
+        Background="#FF262626"
+        Icon="/Images/Logo.png"
+        Name="ThisWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Image Source="/Images/Logo.png" />
+        </Grid>
+
+        <Grid Grid.Row="1"
+              x:Name="ClientsAuto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="CarsGrid">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="8*"/>
+                </Grid.RowDefinitions>
+
+                <ui:SimpleStackPanel HorizontalAlignment="Center"
+                                     VerticalAlignment="Center">
+                    <TextBlock Text="Автомобили клиента"
+                               Foreground="White"
+                               FontSize="17"/>
+                </ui:SimpleStackPanel>
+
+                <ScrollViewer Grid.Row="1"
+                              Margin="10">
+                    <Border BorderBrush="White"
+                            BorderThickness="1"
+                            CornerRadius="15">
+                        <ItemsControl x:Name="CarsControl">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="1"
+                                            BorderBrush="Black"
+                                            Margin="20"
+                                            CornerRadius="10"
+                                            Height="300"
+                                            Padding="5">
+                                        <ui:SimpleStackPanel>
+
+                                            <TextBlock Foreground="White">
+                                                <Run Text="Марка:" />
+                                                <Run Text="{Binding IdModelNavigation.IdMarkNavigation.MarkName}" />
+                                            </TextBlock>
+                                            <TextBlock Foreground="White">
+                                                <Run Text="Модель:" />
+                                                <Run Text="{Binding IdModelNavigation.ModelName}" />
+                                            </TextBlock>
+
+                                            <TextBlock Foreground="White">
+                                                <Run Text="Кузов:" />
+                                                <Run Text="{Binding IdBodyNavigation.BodyName}" />
+                                            </TextBlock>
+
+                                            <TextBlock Foreground="White">
+                                                <Run Text="Цвет:" />
+                                                <Run Text="{Binding IdColorNavigation.ColorName}" />
+                                            </TextBlock >
+
+                                            <TextBlock Foreground="White">
+                                                <Run Text="Номер:" />
+                                                <Run Text="{Binding StateNumber}" />
+                                            </TextBlock>
+
+                                            <TextBlock Foreground="White">
+                                                <Run Text="Длина(мм):" />
+                                                <Run Text="{Binding Length}" />
+                                            </TextBlock>
+                                            <TextBlock Foreground="White">
+                                                <Run Text="Ширина(мм):" />
+                                                <Run Text="{Binding Width}" />
+                                            </TextBlock>
+                                            <TextBlock Foreground="White">
+                                                <Run Text="Высота(мм):" />
+                                                <Run Text="{Binding Height}" />
+                                            </TextBlock>
+                                        </ui:SimpleStackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Border>
+                </ScrollViewer>
+
+            </Grid>
+
+            <Grid Grid.Column="1"
+                  x:Name="ClientData">
+                <Border BorderBrush="White"
+                        BorderThickness="1"
+                        Margin="10"
+                        CornerRadius="10">
+
+                    <ui:SimpleStackPanel Orientation="Vertical"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Spacing="10">
+                        <TextBox x:Name="SurnameTextBox"
+                                 ui:ControlHelper.Header="Фамилия"
+                                 ui:ControlHelper.PlaceholderText="Напишите фамилию" />
+
+                        <TextBox x:Name="NameTextBox"
+                                 ui:ControlHelper.Header="Имя"
+                                 ui:ControlHelper.PlaceholderText="Напишите имя" />
+
+                        <TextBox x:Name="PatronymicTextBox"
+                                 ui:ControlHelper.Header="Отчество"
+                                 ui:ControlHelper.PlaceholderText="Напишите Отчество" />
+
+                        <TextBox x:Name="PhoneNumberTextBox"
+                                 ui:ControlHelper.Header="Номер телефона"
+                                 Width="200"
+                                 ui:ControlHelper.PlaceholderText="Напишите номер телефона" />
+
+                        <ComboBox x:Name="GenderComboBox"
+                                  ui:ControlHelper.Header="Пол"
+                                  HorizontalAlignment="Stretch"
+                                  MinWidth="{Binding ElementName=PhoneNumberTextBox, Path=ActualWidth}"
+                                  ui:ControlHelper.PlaceholderText="Выберите пол">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding GenderName}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <Button x:Name="SaveButton"
+                                Content="Добавить"
+                                Click="SaveButton_Click"
+                                HorizontalAlignment="Center"
+                                BorderBrush="White"
+                                BorderThickness="1"
+                                ui:ControlHelper.CornerRadius="15"
+                                Background="#33050404" />
+                    </ui:SimpleStackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
